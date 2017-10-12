@@ -7,17 +7,16 @@ variable "my_var" {
 }
 
 resource "aws_security_group" "allow_all" {
-  vpc_id = "vpc-cda264b5"
+  vpc_id      = "vpc-cda264b5"
   name        = "tfe-lab02-testing-sg"
   description = "Testing TFEv2"
+
   tags {
     Name = "foo-${uuid()}"
   }
 }
 
-data "aws_availability_zones" "all" {
-
-}
+data "aws_availability_zones" "all" {}
 
 output "myvar" {
   value = "${var.my_var}"
