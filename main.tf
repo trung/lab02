@@ -8,14 +8,13 @@ variable "my_var" {
 
 resource "aws_security_group" "allow_all" {
   vpc_id      = "vpc-cda264b5"
-  name        = "tfe-lab02-testing-sg"
+  name_prefix = "tfe-lab02-testing-sg"
   description = "Testing TFEv2"
 
   tags {
     Name = "foo-${uuid()}"
   }
 }
-
 
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -32,12 +31,6 @@ data "aws_ami" "ubuntu" {
 
   owners = ["099720109477"] # Canonical
 }
-
-resource "aws_instance" "web" {
-  ami           = "${data.aws_ami.ubuntu.id}"
-  instance_type = "t2.micro"
-}
-
 
 data "aws_availability_zones" "all" {}
 
